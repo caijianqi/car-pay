@@ -5,11 +5,12 @@ import vue from '@vitejs/plugin-vue'
 // 开发时通过 Vite 代理转发到真实后端。可通过环境变量 VITE_API_TARGET 覆盖。
 const API_TARGET = process.env.VITE_API_TARGET || 'http://parking.yilufa.net:10889'
 
-// GitHub Pages 项目页面地址为 https://<user>.github.io/<repo>/，
-// 构建时需要把资源路径前缀设为 /car-pay/，否则加载 404。
-// 开发模式仍用根路径，避免 dev server 路径异常。
+// 构建产物的基础路径：
+// - Vercel/Netlify 等根路径部署：默认 '/' 即可
+// - GitHub Pages 项目页面（https://<user>.github.io/<repo>/）：构建时设 VITE_BASE_PATH=/car-pay/
+// 开发模式始终用根路径，避免 dev server 路径异常。
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? '/car-pay/' : '/',
+  base: command === 'build' ? (process.env.VITE_BASE_PATH || '/') : '/',
   plugins: [vue()],
   server: {
     host: '0.0.0.0',

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/viewredis/:path*",
+      "destination": "http://parking.yilufa.net:10889/viewredis/:path*"
+    },
+    {
+      "source": "/merchantpay/:path*",
+      "destination": "http://parking.yilufa.net:10889/merchantpay/:path*"
+    }
+  ]
+}
