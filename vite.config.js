@@ -5,7 +5,11 @@ import vue from '@vitejs/plugin-vue'
 // 开发时通过 Vite 代理转发到真实后端。可通过环境变量 VITE_API_TARGET 覆盖。
 const API_TARGET = process.env.VITE_API_TARGET || 'http://parking.yilufa.net:10889'
 
-export default defineConfig({
+// GitHub Pages 项目页面地址为 https://<user>.github.io/<repo>/，
+// 构建时需要把资源路径前缀设为 /car-pay/，否则加载 404。
+// 开发模式仍用根路径，避免 dev server 路径异常。
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/car-pay/' : '/',
   plugins: [vue()],
   server: {
     host: '0.0.0.0',
@@ -26,4 +30,4 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false
   }
-})
+}))

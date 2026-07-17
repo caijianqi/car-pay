@@ -12,5 +12,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Vite 临时时间戳文件
+vite.config.js.timestamp-*
+
 # WorkBuddy 本地记忆/技能
 .workbuddy/
