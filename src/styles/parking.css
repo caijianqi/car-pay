@@ -1,0 +1,538 @@
+/* parking.css - 停车缴费页面样式（基于 rem，配合 amfe-flexible） */
+
+.container {
+  padding: 0 0.3rem 0.4rem;
+}
+
+/* ===== 顶部 banner ===== */
+.banner {
+  width: 100%;
+  height: 2.6rem;
+  background: linear-gradient(135deg, #0185ff 0%, #36c2ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::after {
+  content: '';
+  position: absolute;
+  bottom: -0.6rem;
+  left: -0.6rem;
+  right: -0.6rem;
+  height: 1.2rem;
+  background: #fff;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.banner-title {
+  font-size: 0.4rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  z-index: 1;
+}
+
+.banner-sub {
+  margin-top: 0.12rem;
+  font-size: 0.26rem;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.banner-icon {
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+  z-index: 1;
+}
+
+/* ===== 卡片区 ===== */
+.carts {
+  margin: -0.5rem 0 0;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-radius: 0.16rem;
+  padding: 0.4rem 0.3rem;
+  box-shadow: 0 0.04rem 0.16rem rgba(0, 0, 0, 0.06);
+}
+
+.carts-enter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== 车牌输入框 ===== */
+.ppay-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.ppay-input input {
+  width: 0.7rem;
+  height: 0.9rem;
+  margin: 0 0.06rem;
+  text-align: center;
+  font-size: 0.36rem;
+  font-weight: 600;
+  color: #333;
+  background: #f7f8fa;
+  border: 0.02rem solid #e4e6eb;
+  border-radius: 0.08rem;
+  transition: border-color 0.2s;
+}
+
+.ppay-input input.active {
+  border-color: #0185ff;
+  background: #fff;
+}
+
+/* 新能源第 8 位 */
+.ppay-input input.energy {
+  width: 0.6rem;
+}
+
+/* ===== 新能源勾选 ===== */
+.login-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 0.3rem;
+  font-size: 0.26rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.checkbox-icon {
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-right: 0.1rem;
+  border: 0.02rem solid #cfd3db;
+  border-radius: 0.06rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.checkbox-icon.checked {
+  background: #0185ff;
+  border-color: #0185ff;
+}
+
+.checkbox-icon.checked::after {
+  content: '';
+  width: 0.14rem;
+  height: 0.08rem;
+  border-left: 0.04rem solid #fff;
+  border-bottom: 0.04rem solid #fff;
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+/* ===== 订单信息列表 ===== */
+.carts-list {
+  margin-top: 0.4rem;
+  border-top: 0.02rem dashed #eef0f4;
+  padding-top: 0.3rem;
+}
+
+.carts-list .flex-between {
+  padding: 0.16rem 0;
+  font-size: 0.28rem;
+}
+
+.carts-list .flex-between span:first-child {
+  color: #999;
+}
+
+.carts-price {
+  color: #333;
+  font-weight: 500;
+}
+
+.carts-price.price {
+  color: #ff5b3b;
+  font-size: 0.34rem;
+  font-weight: 600;
+}
+
+/* ===== flex 工具类 ===== */
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-align {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== 流程图 ===== */
+.process {
+  margin: 0.5rem 0.3rem 0.3rem;
+  padding: 0.4rem 0.2rem;
+  background: #fff;
+  border-radius: 0.16rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.process .step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.process .step-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: #eaf5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.4rem;
+  color: #0185ff;
+  margin-bottom: 0.14rem;
+}
+
+.process .step-label {
+  font-size: 0.24rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* 箭头：容器与图标等高，横线/三角垂直居中 → 自动对齐图标圆心 */
+.process .arrow {
+  flex: 1;
+  height: 0.8rem;
+  margin: 0 0.12rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.process .arrow::before {
+  content: '';
+  width: 100%;
+  height: 0.03rem;
+  background: linear-gradient(to right, #cfe5ff, #0185ff);
+  border-radius: 0.02rem;
+}
+
+.process .arrow::after {
+  content: '';
+  position: absolute;
+  right: -0.02rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 0.14rem solid #0185ff;
+  border-top: 0.08rem solid transparent;
+  border-bottom: 0.08rem solid transparent;
+}
+
+/* ===== 注意事项 ===== */
+.attention {
+  margin: 0 0.3rem;
+  padding: 0.3rem;
+  background: #fff;
+  border-radius: 0.16rem;
+  font-size: 0.28rem;
+  color: #666;
+  line-height: 0.4rem;
+}
+
+.attention .att-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.16rem;
+  font-size: 0.28rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.attention .att-icon {
+  width: 0.3rem;
+  height: 0.3rem;
+  margin-right: 0.1rem;
+  color: #ff9c1a;
+  font-size: 0.3rem;
+}
+
+.attention p {
+  font-size: 0.26rem;
+  color: #888;
+  line-height: 0.42rem;
+  padding-left: 0.08rem;
+}
+
+.attention p span {
+  color: #ff0000;
+}
+
+/* ===== 按钮区 ===== */
+.btn-box {
+  margin: 0.4rem 0.3rem 0;
+  gap: 0.2rem;
+}
+
+.btn {
+  flex: 1;
+  height: 0.88rem;
+  border-radius: 0.44rem;
+  font-size: 0.3rem;
+  font-weight: 500;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+
+.btn:active {
+  opacity: 0.85;
+}
+
+.btn-green {
+  background: linear-gradient(90deg, #19c47b 0%, #16b364 100%);
+}
+
+.btn-blue {
+  background: linear-gradient(90deg, #0185ff 0%, #36a9ff 100%);
+}
+
+.btn-gray {
+  background: #cfd3db;
+  color: #fff;
+}
+
+/* ===== 键盘 ===== */
+.key {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #f2f3f5;
+  padding: 0.2rem 0.1rem 0.3rem;
+  border-top: 0.02rem solid #e4e6eb;
+  z-index: 100;
+}
+
+.key-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.2rem 0.16rem;
+}
+
+.key-title span {
+  font-size: 0.26rem;
+  color: #999;
+}
+
+.key-title button {
+  font-size: 0.26rem;
+  color: #0185ff;
+  padding: 0.06rem 0.16rem;
+}
+
+.key-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.14rem;
+}
+
+.key-center .bt,
+.key-center .bt1 {
+  flex: 1;
+  max-width: 0.9rem;
+  height: 0.9rem;
+  margin: 0 0.06rem;
+  background: #fff;
+  border-radius: 0.1rem;
+  font-size: 0.34rem;
+  color: #333;
+  font-weight: 500;
+  box-shadow: 0 0.02rem 0.06rem rgba(0, 0, 0, 0.08);
+  transition: background 0.1s;
+}
+
+.key-center .bt:active,
+.key-center .bt1:active {
+  background: #d6ebff;
+}
+
+.key-center .bt.special,
+.key-center .bt1.special {
+  background: #cfd3db;
+  color: #666;
+  max-width: 1.2rem;
+}
+
+.key-center .bt1.special.delete {
+  color: #ff5b3b;
+}
+
+/* 数字键盘（密码） */
+.key2 {
+  padding-bottom: 0.4rem;
+}
+
+#key3 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.14rem;
+}
+
+#key3 .bt1 {
+  flex: 1;
+  max-width: 0.9rem;
+}
+
+/* 密码弹窗内的数字键盘 */
+.num-pad {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #f2f3f5;
+  padding: 0.2rem 0.3rem 0.4rem;
+  box-sizing: border-box;
+  z-index: 210;
+}
+
+.num-pad .pad-title {
+  text-align: center;
+  font-size: 0.26rem;
+  color: #999;
+  margin-bottom: 0.2rem;
+}
+
+.num-pad .pad-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.num-pad .pad-grid button {
+  width: 1.6rem;
+  height: 1rem;
+  margin: 0.1rem;
+  background: #fff;
+  border-radius: 0.1rem;
+  font-size: 0.4rem;
+  color: #333;
+  font-weight: 500;
+  box-shadow: 0 0.02rem 0.06rem rgba(0, 0, 0, 0.08);
+}
+
+.num-pad .pad-grid button:active {
+  background: #d6ebff;
+}
+
+.num-pad .pad-grid button.delete {
+  color: #ff5b3b;
+}
+
+/* ===== 密码弹窗 ===== */
+.merchant-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.merchant-modal-box {
+  width: 6rem;
+  padding: 0.4rem 0.3rem 0.3rem;
+  background: #fff;
+  border-radius: 0.2rem;
+}
+
+.merchant-modal-title {
+  margin-bottom: 0.4rem;
+  font-size: 0.32rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.merchant-modal-box .ppay-input input {
+  width: 0.8rem;
+  height: 1rem;
+  margin: 0 0.1rem;
+  background: #fff;
+  border: 0.02rem solid #666;
+  border-radius: 0.08rem;
+}
+
+.merchant-modal-box .btn-box {
+  margin: 0.4rem 0 0;
+}
+
+/* ===== Toast 提示 ===== */
+.toast-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toast-box {
+  max-width: 5rem;
+  padding: 0.24rem 0.36rem;
+  background: rgba(0, 0, 0, 0.78);
+  border-radius: 0.12rem;
+  color: #fff;
+  font-size: 0.28rem;
+  line-height: 0.4rem;
+  text-align: center;
+  word-break: break-all;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.25s;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+}
+
+/* ===== 键盘遮罩 ===== */
+.keyboard-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 90;
+}
