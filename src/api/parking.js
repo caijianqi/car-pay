@@ -1,7 +1,14 @@
 // 停车缴费 API 服务
 // 原页面通过相对路径调用后端接口（jQuery $.ajax，默认表单编码）。
 // 这里使用 fetch + URLSearchParams 保持相同的请求格式。
-// 开发环境通过 vite.config.js 中的 proxy 转发到真实后端。
+//
+// 部署说明：
+// - 开发环境：BASE_URL 留空，请求走相对路径，由 vite.config.js 的 proxy 转发到真实后端。
+// - 生产环境（部署到 GitHub Pages 等静态托管）：必须通过环境变量 VITE_API_BASE
+//   配置真实后端地址（如 https://parking.yilufa.net:10889），否则请求会打到静态服务器，
+//   返回 405 / HTML 错误页。
+// - 注意：跨域调用后端时，后端必须开启 CORS（允许 github.io 域名），且需提供 HTTPS 入口
+//   （GitHub Pages 是 HTTPS，调用 HTTP 后端会被浏览器作为"混合内容"拦截）。
 
 const BASE_URL = import.meta.env.VITE_API_BASE || ''
 
@@ -11,16 +18,31 @@ const BASE_URL = import.meta.env.VITE_API_BASE || ''
  * @param {Record<string, any>} data 请求参数
  * @returns {Promise<any>} 响应 JSON
  */
-function post(url, data = {}) {
+async function post(url, data = {}) {
   const params = new URLSearchParams()
   Object.keys(data).forEach((key) => {
     params.append(key, data[key] === undefined || data[key] === null ? '' : String(data[key]))
   })
-  return fetch(BASE_URL + url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: params
-  }).then((res) => res.json())
+
+  let res
+  try {
+    res = await fetch(BASE_URL + url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params
+    })
+  } catch (e) {
+    // 网络错误 / CORS 被拦截 / 混合内容被拦截
+    throw new Error('网络请求失败，请检查网络或后端地址')
+  }
+
+  const contentType = res.headers.get('content-type') || ''
+  // 静态托管返回 HTML 错误页（405/404）时，避免 .json() 解析崩溃
+  if (!res.ok || !contentType.includes('application/json')) {
+    const text = await res.text().catch(() => '')
+    throw new Error(`请求失败(${res.status})：${text.slice(0, 120)}`)
+  }
+  return res.json()
 }
 
 // 校验是否已领取优惠券（已领取则不能代付）
