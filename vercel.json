@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/viewredis/:path*",
-      "destination": "/api/proxy/viewredis/:path*"
+      "destination": "/api/proxy?target=/viewredis/:path*"
     },
     {
       "source": "/merchantpay/:path*",
-      "destination": "/api/proxy/merchantpay/:path*"
+      "destination": "/api/proxy?target=/merchantpay/:path*"
     }
   ]
 }
