@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/viewredis/:path*",
-      "destination": "http://parking.yilufa.net:10889/viewredis/:path*"
+      "destination": "/api/proxy/viewredis/:path*"
     },
     {
       "source": "/merchantpay/:path*",
-      "destination": "http://parking.yilufa.net:10889/merchantpay/:path*"
+      "destination": "/api/proxy/merchantpay/:path*"
     }
   ]
 }
